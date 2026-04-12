@@ -161,25 +161,22 @@ export function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div
-            className="relative w-64 h-64 md:w-80 md:h-80"
-            animate={reducedMotion ? undefined : { y: [0, -20, 0], rotate: [0, 2, 0] }}
+            className="relative flex items-center justify-center"
+            animate={reducedMotion ? undefined : { y: [0, -20, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="absolute inset-0 bg-boby-yellow rounded-3xl rotate-6 opacity-20 blur-xl" />
-            <div className="absolute inset-0 bg-boby-blue rounded-3xl -rotate-3 opacity-10 blur-xl" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 md:w-56 md:h-56 bg-gradient-to-br from-boby-blue to-blue-800 rounded-2xl shadow-2xl rotate-12 flex items-center justify-center border-4 border-boby-yellow">
-                <div className="w-36 h-36 md:w-44 md:h-44 bg-white rounded-xl -rotate-12 flex items-center justify-center shadow-inner p-4">
-                  <Image
-                    src="/logo.png"
-                    alt="BobyAds"
-                    width={140}
-                    height={47}
-                    className="w-full h-auto object-contain"
-                  />
-                </div>
-              </div>
-            </div>
+            {/* Golden glow */}
+            <div className="absolute w-[480px] h-40 bg-boby-yellow rounded-full opacity-30 blur-3xl" />
+            <div className="absolute w-96 h-28 bg-boby-yellow rounded-full opacity-20 blur-2xl" />
+            {/* Logo */}
+            <Image
+              src="/logo.png"
+              alt="BobyAds"
+              width={500}
+              height={168}
+              className="relative z-10 w-80 md:w-[420px] h-auto object-contain"
+              style={{ filter: "brightness(0) invert(1) drop-shadow(0 0 40px rgba(254,195,1,0.9))" }}
+            />
           </motion.div>
         </motion.div>
 
