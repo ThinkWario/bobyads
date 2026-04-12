@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { BRAND } from "@/lib/constants";
 import { staggerContainer, staggerItem } from "@/lib/animations";
@@ -168,8 +169,14 @@ export function Hero() {
             <div className="absolute inset-0 bg-boby-blue rounded-3xl -rotate-3 opacity-10 blur-xl" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-48 h-48 md:w-56 md:h-56 bg-gradient-to-br from-boby-blue to-blue-800 rounded-2xl shadow-2xl rotate-12 flex items-center justify-center border-4 border-boby-yellow">
-                <div className="w-32 h-32 md:w-36 md:h-36 bg-white rounded-xl -rotate-12 flex items-center justify-center shadow-inner">
-                  <span className="text-6xl md:text-7xl font-bold text-boby-blue">B</span>
+                <div className="w-36 h-36 md:w-44 md:h-44 bg-white rounded-xl -rotate-12 flex items-center justify-center shadow-inner p-4">
+                  <Image
+                    src="/logo.png"
+                    alt="BobyAds"
+                    width={140}
+                    height={47}
+                    className="w-full h-auto object-contain"
+                  />
                 </div>
               </div>
             </div>
