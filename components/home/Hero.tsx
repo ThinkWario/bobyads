@@ -175,7 +175,7 @@ export function Hero() {
               width={500}
               height={168}
               className="relative z-10 w-80 md:w-[420px] h-auto object-contain"
-              style={{ filter: "brightness(0) invert(1) drop-shadow(0 0 40px rgba(254,195,1,0.9))" }}
+              style={{ filter: "drop-shadow(0 0 40px rgba(254,195,1,0.85))" }}
             />
           </motion.div>
         </motion.div>
