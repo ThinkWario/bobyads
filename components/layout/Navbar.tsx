@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { NAV_LINKS } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { MobileMenu } from "./MobileMenu";
@@ -27,8 +28,15 @@ export function Navbar() {
         }`}
       >
         <nav className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="font-bold text-xl text-boby-blue">
-            BobyAds
+          <Link href="/" aria-label="BobyAds - Inicio">
+            <Image
+              src="/logo.png"
+              alt="BobyAds"
+              width={140}
+              height={47}
+              priority
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop links */}

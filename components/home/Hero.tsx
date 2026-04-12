@@ -1,15 +1,34 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { BRAND } from "@/lib/constants";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
+const WORDS = ["Meta Ads", "Google Ads", "Agentes IA"];
+
 export function Hero() {
   const reducedMotion = useReducedMotion();
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((i) => (i + 1) % WORDS.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-boby-white">
+      {/* Grain texture overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none z-10"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundSize: "200px 200px",
+        }}
+      />
       {/* Animated dot-grid background */}
       <motion.div
         className="absolute inset-0 pointer-events-none -z-10"
@@ -61,10 +80,29 @@ export function Hero() {
         >
           <motion.h1
             variants={staggerItem}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-boby-blue leading-[1.1] mb-6"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-boby-blue leading-[1.1] mb-2"
           >
             Convierte mas <span className="text-boby-yellow">prospectos</span> en clientes
           </motion.h1>
+
+          <motion.div
+            variants={staggerItem}
+            className="mb-6 h-[1.2em] overflow-hidden"
+          >
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={WORDS[wordIndex]}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.35 }}
+                className="text-boby-yellow text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight"
+                style={{ display: "inline-block" }}
+              >
+                {WORDS[wordIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </motion.div>
 
           <motion.p
             variants={staggerItem}

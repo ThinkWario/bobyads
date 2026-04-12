@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BRAND, NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { Share2, Mail, Phone } from "lucide-react";
 
@@ -8,7 +9,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Col 1: Logo + description */}
         <div>
-          <h3 className="text-xl font-bold text-boby-yellow mb-3">BobyAds</h3>
+          <Image src="/logo.png" alt="BobyAds" width={140} height={47} className="h-10 w-auto mb-3 brightness-0 invert" />
           <p className="text-sm text-gray-300 leading-relaxed">
             Agencia de publicidad digital enfocada en resultados. Convierte mas
             prospectos en clientes con campanas optimizadas.

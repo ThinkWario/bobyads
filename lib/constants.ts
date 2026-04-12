@@ -10,6 +10,7 @@ export const BRAND = {
 export const NAV_LINKS = [
   { label: "Inicio", href: "/", external: false },
   { label: "Servicios", href: "/servicios", external: false },
+  { label: "Agentes IA", href: "/agentes", external: false },
   { label: "Tienda", href: BRAND.tiendaUrl, external: true },
   { label: "Blog", href: BRAND.blogUrl, external: true },
   { label: "Nosotros", href: "/nosotros", external: false },
