@@ -35,7 +35,11 @@ export function Navbar() {
               width={140}
               height={47}
               priority
-              className="h-10 w-auto"
+              className="h-10 w-auto transition-all duration-300"
+              style={scrolled
+                ? { filter: "brightness(0)" }
+                : { filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.35))" }
+              }
             />
           </Link>
 
@@ -48,14 +52,22 @@ export function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-boby-dark hover:text-boby-blue transition-colors"
+                    className={`text-sm font-medium transition-colors ${
+                      scrolled
+                        ? "text-boby-dark hover:text-boby-blue"
+                        : "text-white/90 hover:text-boby-yellow"
+                    }`}
                   >
                     {link.label}
                   </a>
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-sm font-medium text-boby-dark hover:text-boby-blue transition-colors"
+                    className={`text-sm font-medium transition-colors ${
+                      scrolled
+                        ? "text-boby-dark hover:text-boby-blue"
+                        : "text-white/90 hover:text-boby-yellow"
+                    }`}
                   >
                     {link.label}
                   </Link>
@@ -72,7 +84,7 @@ export function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2"
+            className={`md:hidden p-2 transition-colors ${scrolled ? "text-boby-dark" : "text-white"}`}
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menu"
           >

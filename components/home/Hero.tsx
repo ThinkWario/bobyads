@@ -69,11 +69,12 @@ export function Hero() {
 
       {/* ── Content overlay ── */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-5 items-center gap-12">
         <motion.div
           variants={staggerContainer}
           initial={reducedMotion ? undefined : "hidden"}
           animate={reducedMotion ? undefined : "visible"}
-          className="max-w-4xl"
+          className="lg:col-span-3"
         >
           {/* Badge */}
           <motion.div variants={staggerItem} className="mb-6">
@@ -150,6 +151,32 @@ export function Hero() {
             ))}
           </motion.div>
         </motion.div>
+
+        {/* ── Floating "B" element ── */}
+        <motion.div
+          className="lg:col-span-2 relative hidden lg:flex justify-center items-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div
+            className="relative w-64 h-64 md:w-80 md:h-80"
+            animate={reducedMotion ? undefined : { y: [0, -20, 0], rotate: [0, 2, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="absolute inset-0 bg-boby-yellow rounded-3xl rotate-6 opacity-20 blur-xl" />
+            <div className="absolute inset-0 bg-boby-blue rounded-3xl -rotate-3 opacity-10 blur-xl" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-48 h-48 md:w-56 md:h-56 bg-gradient-to-br from-boby-blue to-blue-800 rounded-2xl shadow-2xl rotate-12 flex items-center justify-center border-4 border-boby-yellow">
+                <div className="w-32 h-32 md:w-36 md:h-36 bg-white rounded-xl -rotate-12 flex items-center justify-center shadow-inner">
+                  <span className="text-6xl md:text-7xl font-bold text-boby-blue">B</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        </div>
       </div>
     </section>
   );
