@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#EFF6FF"/>
+  <!-- Background glows -->
+  <circle cx="320" cy="60" r="100" fill="#BFDBFE" opacity="0.5"/>
+  <circle cx="80" cy="250" r="70" fill="#93C5FD" opacity="0.3"/>
+  <!-- Main card -->
+  <rect x="50" y="50" width="300" height="200" rx="20" fill="white" stroke="#0447AB" stroke-width="2"/>
+  <!-- Top gradient bar -->
+  <defs>
+    <linearGradient id="metaGrad" x1="50" y1="0" x2="350" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0447AB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <rect x="50" y="50" width="300" height="52" rx="20" fill="url(#metaGrad)"/>
+  <rect x="50" y="80" width="300" height="22" fill="#0447AB"/>
+  <!-- Meta infinity logo simplified -->
+  <path d="M160 76 C160 70 168 65 176 70 C184 75 184 85 176 90 C168 95 160 90 160 84" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M176 70 C184 65 192 70 192 76 C192 84 184 90 176 90" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Title -->
+  <text x="210" y="82" font-family="sans-serif" font-size="13" font-weight="700" fill="white">AGENTE IA META ADS</text>
+  <!-- AI brain icon area -->
+  <circle cx="200" cy="148" r="40" fill="#EFF6FF" stroke="#0447AB" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <!-- Neural network dots -->
+  <circle cx="200" cy="130" r="5" fill="#0447AB"/>
+  <circle cx="183" cy="148" r="5" fill="#FEC301"/>
+  <circle cx="217" cy="148" r="5" fill="#FEC301"/>
+  <circle cx="190" cy="164" r="5" fill="#0447AB"/>
+  <circle cx="210" cy="164" r="5" fill="#0447AB"/>
+  <!-- Connections -->
+  <line x1="200" y1="130" x2="183" y2="148" stroke="#0447AB" stroke-width="1.5"/>
+  <line x1="200" y1="130" x2="217" y2="148" stroke="#0447AB" stroke-width="1.5"/>
+  <line x1="183" y1="148" x2="190" y2="164" stroke="#FEC301" stroke-width="1.5"/>
+  <line x1="217" y1="148" x2="210" y2="164" stroke="#FEC301" stroke-width="1.5"/>
+  <line x1="183" y1="148" x2="210" y2="164" stroke="#0447AB" stroke-width="1" stroke-dasharray="2 2"/>
+  <!-- Price badge -->
+  <rect x="118" y="218" width="164" height="28" rx="14" fill="#FEC301"/>
+  <text x="200" y="237" font-family="sans-serif" font-size="12" font-weight="800" fill="#0447AB" text-anchor="middle">CLP 199.000</text>
+</svg>
