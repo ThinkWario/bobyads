@@ -4,13 +4,14 @@ import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { BRAND } from "@/lib/constants";
-import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { staggerContainer, staggerItem } from "@/lib/animations";
 
 const WORDS = ["Meta Ads", "Google Ads", "Agentes IA"];
 
 export function Hero() {
   const reducedMotion = useReducedMotion();
   const [wordIndex, setWordIndex] = useState(0);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,102 +21,109 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-boby-white">
-      {/* Grain texture overlay */}
+    <section className="relative min-h-[92vh] flex items-center overflow-hidden" style={{ backgroundColor: "#0447AB" }}>
+
+      {/* ── Video background (plays when hero.mp4 exists) ── */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        onCanPlay={() => setVideoReady(true)}
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+        style={{ opacity: videoReady ? 1 : 0 }}
+        aria-hidden
+      >
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
+
+      {/* ── Fallback background (shown until video loads) ── */}
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none z-10"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundSize: "200px 200px",
-        }}
-      />
-      {/* Animated dot-grid background */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none -z-10"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-        animate={
-          reducedMotion
-            ? undefined
-            : { backgroundPosition: ["0px 0px", "28px 28px"] }
-        }
-        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-      />
-      {/* Tech Premium Background: Dynamic SVG Particles */}
-      <div className="absolute inset-0 -z-10 opacity-40">
-        <svg className="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-              <stop offset="0%" stopColor="#FEC301" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#FEC301" stopOpacity="0" />
-            </radialGradient>
-            <radialGradient id="grad2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-              <stop offset="0%" stopColor="#0447AB" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#0447AB" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <motion.circle
-            cx="20%" cy="20%" r="150" fill="url(#grad1)"
-            animate={{ x: [0, 30, 0], y: [0, 50, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.circle
-            cx="80%" cy="80%" r="200" fill="url(#grad2)"
-            animate={{ x: [0, -40, 0], y: [0, -60, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </svg>
+        className="absolute inset-0 transition-opacity duration-700 pointer-events-none"
+        style={{ opacity: videoReady ? 0 : 1 }}
+      >
+        {/* Dot grid */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+          animate={reducedMotion ? undefined : { backgroundPosition: ["0px 0px", "28px 28px"] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        />
+        {/* Grain */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            backgroundSize: "200px 200px",
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 w-full grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-        {/* Left Side: Content (60%) */}
+      {/* ── Dark overlay for text readability over video ── */}
+      {videoReady && (
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(4,71,171,0.55)" }} />
+      )}
+
+      {/* ── Content overlay ── */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-24">
         <motion.div
-          className="lg:col-span-3 z-10"
           variants={staggerContainer}
           initial={reducedMotion ? undefined : "hidden"}
           animate={reducedMotion ? undefined : "visible"}
+          className="max-w-4xl"
         >
+          {/* Badge */}
+          <motion.div variants={staggerItem} className="mb-6">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.3em] px-4 py-2 border"
+              style={{ borderColor: "rgba(254,195,1,0.4)", color: "#FEC301" }}
+            >
+              Agencia #1 en Conversión · Chile
+            </span>
+          </motion.div>
+
+          {/* Headline */}
           <motion.h1
             variants={staggerItem}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-boby-blue leading-[1.1] mb-2"
+            className="text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-none text-white mb-4"
+            style={{ letterSpacing: "-2px" }}
           >
-            Convierte mas <span className="text-boby-yellow">prospectos</span> en clientes
+            Publicidad<br />
+            <span style={{ color: "#FEC301" }}>que</span> Convierte
           </motion.h1>
 
-          <motion.div
-            variants={staggerItem}
-            className="mb-6 h-[1.2em] overflow-hidden"
-          >
+          {/* Rotating service */}
+          <motion.div variants={staggerItem} className="mb-8 h-[2rem] overflow-hidden flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: "#FEC301" }} />
             <AnimatePresence mode="wait">
               <motion.span
                 key={WORDS[wordIndex]}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.35 }}
-                className="text-boby-yellow text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight"
-                style={{ display: "inline-block" }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.3 }}
+                className="text-lg font-semibold uppercase tracking-[0.25em]"
+                style={{ color: "#FEC301" }}
               >
                 {WORDS[wordIndex]}
               </motion.span>
             </AnimatePresence>
           </motion.div>
 
+          {/* Description */}
           <motion.p
             variants={staggerItem}
-            className="text-lg md:text-xl text-boby-dark/80 mb-10 max-w-2xl leading-relaxed"
+            className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl leading-relaxed"
           >
-            No somos una agencia más. Fusionamos <span className="font-semibold text-boby-blue">IA avanzada</span> y
-            estrategias de conversión reales para escalar tu facturación con precisión quirúrgica.
+            Fusionamos <span className="text-white font-semibold">IA avanzada</span> y estrategias
+            de conversión reales para escalar tu facturación con precisión quirúrgica.
           </motion.p>
 
-          <motion.div
-            variants={staggerItem}
-            className="flex flex-wrap gap-4"
-          >
+          {/* CTAs */}
+          <motion.div variants={staggerItem} className="flex flex-wrap gap-4">
             <Button href="/servicios" variant="primary" className="px-8 py-4 text-lg">
               Ver Servicios
             </Button>
@@ -123,35 +131,23 @@ export function Hero() {
               Ver Tienda
             </Button>
           </motion.div>
-        </motion.div>
 
-        {/* Right Side: Visual Asset (40%) */}
-        <motion.div
-          className="lg:col-span-2 relative flex justify-center items-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          {/* Abstract Tech Shape */}
+          {/* Stats strip */}
           <motion.div
-            className="relative w-64 h-64 md:w-96 md:h-96"
-            animate={reducedMotion ? undefined : {
-              y: [0, -20, 0],
-              rotate: [0, 2, 0]
-            }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            variants={staggerItem}
+            className="mt-16 flex flex-wrap gap-8"
           >
-            {/* Layered Geometric Elements */}
-            <div className="absolute inset-0 bg-boby-yellow rounded-3xl rotate-6 opacity-20 blur-xl" />
-            <div className="absolute inset-0 bg-boby-blue rounded-3xl -rotate-3 opacity-10 blur-xl" />
-
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-boby-blue to-blue-800 rounded-2xl shadow-2xl rotate-12 flex items-center justify-center border-4 border-boby-yellow">
-                <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-xl -rotate-12 flex items-center justify-center shadow-inner">
-                  <span className="text-6xl md:text-8xl font-bold text-boby-blue">B</span>
-                </div>
+            {[
+              { value: "+500", label: "Clientes Activos" },
+              { value: "3x", label: "ROAS Promedio" },
+              { value: "98%", label: "Retención" },
+              { value: "$15M", label: "USD Gestionados" },
+            ].map((stat) => (
+              <div key={stat.label} className="border-l-2 pl-4" style={{ borderColor: "#FEC301" }}>
+                <div className="text-3xl font-black text-white leading-none">{stat.value}</div>
+                <div className="text-xs uppercase tracking-widest text-white/50 mt-1">{stat.label}</div>
               </div>
-            </div>
+            ))}
           </motion.div>
         </motion.div>
       </div>
