@@ -5,10 +5,13 @@ type ButtonVariant = "primary" | "secondary" | "outline";
 
 interface ButtonProps {
   children: ReactNode;
-  href: string;
+  href?: string;
   variant?: ButtonVariant;
   external?: boolean;
   className?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  onClick?: () => void;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
@@ -26,9 +29,25 @@ export function Button({
   variant = "primary",
   external = false,
   className = "",
+  type = "button",
+  disabled = false,
+  onClick,
 }: ButtonProps) {
   const baseStyles =
     "inline-block px-6 py-3 rounded font-semibold text-base uppercase tracking-wider text-center transition-colors duration-200";
+
+  if (!href) {
+    return (
+      <button
+        type={type}
+        disabled={disabled}
+        onClick={onClick}
+        className={`${baseStyles} ${variantStyles[variant]} ${className} disabled:opacity-50 disabled:cursor-not-allowed`}
+      >
+        {children}
+      </button>
+    );
+  }
 
   if (external) {
     return (
