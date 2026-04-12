@@ -8,12 +8,12 @@ export const BRAND = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/servicios" },
+  { label: "Inicio", href: "/", external: false },
+  { label: "Servicios", href: "/servicios", external: false },
   { label: "Tienda", href: BRAND.tiendaUrl, external: true },
   { label: "Blog", href: BRAND.blogUrl, external: true },
-  { label: "Nosotros", href: "/nosotros" },
-  { label: "Contacto", href: "/contacto" },
+  { label: "Nosotros", href: "/nosotros", external: false },
+  { label: "Contacto", href: "/contacto", external: false },
 ] as const;
 
 export const SOCIAL_LINKS = {
