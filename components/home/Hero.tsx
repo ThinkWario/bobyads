@@ -155,7 +155,7 @@ export function Hero() {
 
         {/* ── Floating "B" element ── */}
         <motion.div
-          className="lg:col-span-2 relative hidden lg:flex justify-center items-center"
+          className="lg:col-span-2 relative hidden lg:flex justify-center items-center self-start mt-[8.5rem]"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}

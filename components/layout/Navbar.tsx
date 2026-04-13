@@ -23,8 +23,8 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/90 backdrop-blur-md shadow-sm"
-            : "bg-transparent"
+            ? "bg-white/95 backdrop-blur-md shadow-sm"
+            : "bg-white"
         }`}
       >
         <nav className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -36,10 +36,7 @@ export function Navbar() {
               height={47}
               priority
               className="h-10 w-auto transition-all duration-300"
-              style={scrolled
-                ? { filter: "brightness(0)" }
-                : { filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.35))" }
-              }
+              style={{ filter: "brightness(0)" }}
             />
           </Link>
 
@@ -52,22 +49,14 @@ export function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-sm font-medium transition-colors ${
-                      scrolled
-                        ? "text-boby-dark hover:text-boby-blue"
-                        : "text-white/90 hover:text-boby-yellow"
-                    }`}
+                    className="text-sm font-medium transition-colors text-boby-dark hover:text-boby-yellow"
                   >
                     {link.label}
                   </a>
                 ) : (
                   <Link
                     href={link.href}
-                    className={`text-sm font-medium transition-colors ${
-                      scrolled
-                        ? "text-boby-dark hover:text-boby-blue"
-                        : "text-white/90 hover:text-boby-yellow"
-                    }`}
+                    className="text-sm font-medium transition-colors text-boby-dark hover:text-boby-yellow"
                   >
                     {link.label}
                   </Link>
@@ -84,7 +73,7 @@ export function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className={`md:hidden p-2 transition-colors ${scrolled ? "text-boby-dark" : "text-white"}`}
+            className="md:hidden p-2 transition-colors text-boby-dark"
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menu"
           >
